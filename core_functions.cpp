@@ -21,4 +21,11 @@ class play_up_next_queue{
 };
 class playlist_linked_list{
     //sokheang
+public:
+    void printHello()
+    {
+        std::cout << "Hello" << std::endl;
+        std::cout << "This is NGEP Project" << std::endl;
+        
+    }
 };
