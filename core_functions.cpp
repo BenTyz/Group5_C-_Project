@@ -19,13 +19,72 @@ class play_history_stack{
 class play_up_next_queue{
     //chikheang
 };
+
+// sokheang
+
+struct Song{
+    std :: string title;
+    Song *next;
+    Song *prev;
+};
 class playlist_linked_list{
-    //sokheang
-public:
-    void printHello()
-    {
-        std::cout << "Hello" << std::endl;
-        std::cout << "This is NGEP Project" << std::endl;
-        
+   private:
+       Song *current;
+    public:
+        playlist_linked_list(){
+            current = nullptr;
+        }
+void add_song(std::string title){
+    Song *new_song = new Song();
+    new_song->title = title;
+    if(current==nullptr){
+        new_song->next = new_song;
+        new_song->prev = new_song;
+        current = new_song;
+    }else{
+        Song *last = current->prev;
+        new_song->prev = last;
+        new_song->next = current;
+        current->prev = new_song;
     }
+    std::cout << "Added: " << title << std::endl;
+}
+void play_next(){
+    if(current==nullptr){
+        std::cout << "This playlist is empty." << std::endl;
+        return;
+    }else{
+        current = current->next;
+        std::cout << "The next song is: " << current->title << std::endl;
+    }
+}
+void play_previous()
+{
+    if (current == nullptr)
+    {
+        std::cout << "This playlist is empty." << std::endl;
+        return;
+    }
+    else
+    {
+        current = current->prev;
+        std::cout << "The previous song is: " << current->title << std::endl;
+    }
+}
+void display_playlist(){
+    if (current == nullptr)
+    {
+        std::cout << "This playlist is empty." << std::endl;
+        return;
+    }
+    std::cout << "-----Playlist-----" << std::endl;
+    Song *temp = current;
+    do{
+        std::cout << temp->title << std::endl;
+        if(temp==current){
+            std::cout << "Now playing" << std::endl;
+        }
+        temp = temp->next;
+    } while (temp != current);
+}
 };
