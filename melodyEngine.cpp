@@ -21,6 +21,5 @@ void interface(){
 }
 int main(){
     //interface nuth
-    interface();
     return 0;
 }

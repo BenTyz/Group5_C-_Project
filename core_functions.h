@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 using namespace std;
+#ifndef CORE_FUNCTIONS_H
+#define CORE_FUNCTIONS_H
 /*
 In this header file, the thing that remain here are data type and class declaration as well,
 like when ever you are establishing a class or a struct please put it here for example:
@@ -37,3 +39,17 @@ struct QueueNode{
 
     QueueNode(Song s): song(s), next(nullptr) {};
 };
+class playlist_linked_list
+{
+private:
+    Node_Song *current;
+
+public:
+    playlist_linked_list();
+    void add_song(std::string title);
+    void play_next();
+    void play_previous();
+    void display_playlist();
+};
+
+#endif

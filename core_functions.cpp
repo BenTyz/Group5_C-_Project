@@ -19,13 +19,74 @@ class play_history_stack{
 class play_up_next_queue{
     //chikheang
 };
-class playlist_linked_list{
-    //sokheang
-public:
-    void printHello()
+
+// sokheang
+
+// sokheang
+// NOTE: Do NOT redefine struct Song here — it already exists in core_functions.h
+// Use the Node_Song struct your teammate built in the header instead.
+
+playlist_linked_list::playlist_linked_list()
+{
+    current = nullptr;
+}
+
+void playlist_linked_list::add_song(std::string title)
+{
+    Node_Song *new_song = new Node_Song(Song{title, "", ""});
+    if (current == nullptr)
     {
-        std::cout << "Hello" << std::endl;
-        std::cout << "This is NGEP Project" << std::endl;
-        
+        new_song->next = new_song;
+        new_song->prev = new_song;
+        current = new_song;
     }
-};
+    else
+    {
+        Node_Song *last = current->prev;
+        last->next = new_song;
+        new_song->prev = last;
+        new_song->next = current;
+        current->prev = new_song;
+    }
+    std::cout << "Added: " << title << std::endl;
+}
+
+void playlist_linked_list::play_next()
+{
+    if (current == nullptr)
+    {
+        std::cout << "This playlist is empty." << std::endl;
+        return;
+    }
+    current = current->next;
+    std::cout << "The next song is: " << current->song.name << std::endl;
+}
+
+void playlist_linked_list::play_previous()
+{
+    if (current == nullptr)
+    {
+        std::cout << "This playlist is empty." << std::endl;
+        return;
+    }
+    current = current->prev;
+    std::cout << "The previous song is: " << current->song.name << std::endl;
+}
+
+void playlist_linked_list::display_playlist()
+{
+    if (current == nullptr)
+    {
+        std::cout << "This playlist is empty." << std::endl;
+        return;
+    }
+    std::cout << "-----Playlist-----" << std::endl;
+    Node_Song *temp = current;
+    do
+    {
+        std::cout << temp->song.name << std::endl;
+        if (temp == current)
+            std::cout << "Now playing" << std::endl;
+        temp = temp->next;
+    } while (temp != current);
+}
