@@ -16,6 +16,7 @@ and you don't have to give any definition in here but only declaration.
 You can do more research on how this works
 */
 struct Song{
+    int id;
     string name;
     string author;
     string file_path;
@@ -46,7 +47,7 @@ private:
 
 public:
     playlist_linked_list();
-    void add_song(std::string title);
+    void add_song(string title, string author, string filePath);
     void play_next();
     void play_previous();
     void display_playlist();

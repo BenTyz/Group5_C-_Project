@@ -2,6 +2,7 @@
 #include <vector>
 #include "core_functions.h"
 #include <cstdlib>
+using namespace std;
 /*
 This file only contains the class and core function of this playlist project which includes:
 _Array (Dynamic Array / std::vector): Acts as the master library storing all available audio tracks in memory, allowing instant $O(1)$ lookup whenever a song ID is selected.
@@ -31,9 +32,9 @@ playlist_linked_list::playlist_linked_list()
     current = nullptr;
 }
 
-void playlist_linked_list::add_song(std::string title)
+void playlist_linked_list::add_song(string title, string author, string filePath)
 {
-    Node_Song *new_song = new Node_Song(Song{title, "", ""});
+    Node_Song *new_song = new Node_Song(Song{title, author, filePath});
     if (current == nullptr)
     {
         new_song->next = new_song;
@@ -48,45 +49,45 @@ void playlist_linked_list::add_song(std::string title)
         new_song->next = current;
         current->prev = new_song;
     }
-    std::cout << "Added: " << title << std::endl;
+    cout << "Added: " << title << endl;
 }
 
 void playlist_linked_list::play_next()
 {
     if (current == nullptr)
     {
-        std::cout << "This playlist is empty." << std::endl;
+        cout << "This playlist is empty." << endl;
         return;
     }
     current = current->next;
-    std::cout << "The next song is: " << current->song.name << std::endl;
+    cout << "The next song is: " << current->song.name << ":"<< current->song.author<< endl;
 }
 
 void playlist_linked_list::play_previous()
 {
     if (current == nullptr)
     {
-        std::cout << "This playlist is empty." << std::endl;
+        cout << "This playlist is empty." << endl;
         return;
     }
     current = current->prev;
-    std::cout << "The previous song is: " << current->song.name << std::endl;
+    cout << "The previous song is: " << current->song.name << endl;
 }
 
 void playlist_linked_list::display_playlist()
 {
     if (current == nullptr)
     {
-        std::cout << "This playlist is empty." << std::endl;
+        cout << "This playlist is empty." << endl;
         return;
     }
-    std::cout << "-----Playlist-----" << std::endl;
+    cout << "-----Playlist-----" << endl;
     Node_Song *temp = current;
     do
     {
-        std::cout << temp->song.name << std::endl;
+        cout << temp->song.name << endl;
         if (temp == current)
-            std::cout << "Now playing" << std::endl;
+            cout << "Now playing" << endl;
         temp = temp->next;
     } while (temp != current);
 }
