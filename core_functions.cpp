@@ -2,6 +2,7 @@
 #include <vector>
 #include "core_functions.h"
 #include <cstdlib>
+using namespace std;
 /*
 This file only contains the class and core function of this playlist project which includes:
 _Array (Dynamic Array / std::vector): Acts as the master library storing all available audio tracks in memory, allowing instant $O(1)$ lookup whenever a song ID is selected.
