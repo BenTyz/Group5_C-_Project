@@ -15,6 +15,66 @@ _Stack: Tracks play history for the "Previous Song" feature. Every time a song f
 */
 class play_history_stack{
     //ravin
+    StackNode *top_node;
+    int count;
+
+public:
+    play_history_stack(){
+        top_node = nullptr;
+        count = 0;
+    }
+
+    ~play_history_stack(){
+        while(!isEmpty()){
+            pop();
+        }
+    }
+
+    // Call this whenever a song finishes playing
+    void push(Song s){
+        StackNode *new_node = new StackNode(s);
+        new_node->next = top_node;
+        top_node = new_node;
+        count++;
+    }
+
+    // Call this for the "Previous Song" feature
+    bool pop(){
+        if(isEmpty()){
+            return false;
+        }
+        StackNode *temp = top_node;
+        top_node = top_node->next;
+        delete temp;
+        count--;
+        return true;
+    }
+
+    // Peek at the most recently played song without removing it
+    bool top(Song &result){
+        if(isEmpty()){
+            return false;
+        }
+        result = top_node->song;
+        return true;
+    }
+
+    bool isEmpty(){
+        return top_node == nullptr;
+    }
+
+    int size(){
+        return count;
+    }
+
+    void printHistory(){
+        std::cout << "Play History (most recent first):" << std::endl;
+        StackNode *cur = top_node;
+        while(cur != nullptr){
+            std::cout << " - " << cur->song.name << " by " << cur->song.author << std::endl;
+            cur = cur->next;
+        }
+    }
 };
 class play_up_next_queue{
     //chikheang
