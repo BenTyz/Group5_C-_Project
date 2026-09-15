@@ -1,6 +1,8 @@
+#ifndef CORE_FUNCTIONS_H
+#define CORE_FUNCTIONS_H
+
 #include <iostream>
 #include <string>
-using namespace std;
 /*
 In this header file, the thing that remain here are data type and class declaration as well,
 like when ever you are establishing a class or a struct please put it here for example:
@@ -14,9 +16,10 @@ and you don't have to give any definition in here but only declaration.
 You can do more research on how this works
 */
 struct Song{
-    string name;
-    string author;
-    string file_path;
+    int id;
+    std::string name;
+    std::string author;
+    std::string file_path;
 };
 struct Node_Song{
     Song song;
@@ -37,3 +40,48 @@ struct QueueNode{
 
     QueueNode(Song s): song(s), next(nullptr) {};
 };
+
+class play_history_stack{
+    //ravin
+private:
+    StackNode *top_node;
+    int count;
+
+public:
+    play_history_stack();
+    ~play_history_stack();
+    void push(Song s);
+    Song pop(); 
+    Song top(Song &result);
+    bool isEmpty();
+    int size();
+    void printHistory();
+};
+class play_up_next_queue{
+    //chikheang
+private:
+    QueueNode *front, *rear;
+    int count;
+public:
+    play_up_next_queue();
+    ~play_up_next_queue();
+    void enqueue(Song s);
+    Song dequeue();
+
+    bool isEmpty();
+};
+
+class playlist_linked_list
+{
+public:
+    Node_Song *current;
+    playlist_linked_list();
+    void add_song(Song song);
+    void play_next();
+    void play_previous();
+    void display_playlist();
+    void clear_playlist();
+    bool empty();
+};
+
+#endif
