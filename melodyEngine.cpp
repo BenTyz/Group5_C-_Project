@@ -103,7 +103,7 @@ public:
         }
         cout << "-----Library-----" << endl;
         for(const auto &s : main_library){
-            cout << "  [" << s.id << "] " << s.name << " - " << s.author << endl;
+            cout << "  [" << s.id << "] " << s.name << endl;
         }
     }
     void addToQueue(int id){
@@ -125,7 +125,7 @@ public:
                 historySongs.push(currentTrack->song);
             }
             Song queuedSong = nextQueue.dequeue();
-            cout << "[Audio] : Playing from queue: " << queuedSong.name << ": " << queuedSong.author << endl;
+            cout << "[Audio] : Playing from queue: " << queuedSong.name  << endl;
             playAudio(queuedSong.file_path);
             return; 
         }
