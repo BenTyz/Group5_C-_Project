@@ -1,8 +1,8 @@
-#include <iostream>
-#include <string>
-using namespace std;
 #ifndef CORE_FUNCTIONS_H
 #define CORE_FUNCTIONS_H
+
+#include <iostream>
+#include <string>
 /*
 In this header file, the thing that remain here are data type and class declaration as well,
 like when ever you are establishing a class or a struct please put it here for example:
@@ -17,9 +17,9 @@ You can do more research on how this works
 */
 struct Song{
     int id;
-    string name;
-    string author;
-    string file_path;
+    std::string name;
+    std::string author;
+    std::string file_path;
 };
 struct Node_Song{
     Song song;

@@ -5,8 +5,10 @@
 #include <filesystem>
 #include <vector>
 #include "core_functions.h"
+
 #define MINIAUDIO_IMPLEMENTATION
 #include "miniaudio.h"
+
 using namespace std;
 namespace fs = std::filesystem;
 class MelodyEngine{
@@ -206,7 +208,7 @@ public:
     }
     //nuth
 };
-void interface(){
+void displayUI(){
     cout << "=============================" << endl;
     cout << "        MelodyEngine" << endl;
     cout << "=============================" << endl;
@@ -231,7 +233,7 @@ int main(){
  
     bool running = true;
     while(running){ 
-        interface();
+        displayUI();
         cin >> choice;
         cout << endl;
         switch (choice){
