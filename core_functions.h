@@ -40,17 +40,35 @@ struct QueueNode{
 
     QueueNode(Song s): song(s), next(nullptr) {};
 };
-class playlist_linked_list
-{
+
+class play_history_stack{
+    //ravin
 private:
-    Node_Song *current;
+    StackNode *top_node;
+    int count;
 
 public:
+    play_history_stack();
+    ~play_history_stack();
+    void push(Song s);
+    Song pop(); 
+    Song top(Song &result);
+    bool isEmpty();
+    int size();
+    void printHistory();
+};
+class play_up_next_queue{};
+class playlist_linked_list
+{
+public:
+    Node_Song *current;
     playlist_linked_list();
-    void add_song(string title, string author, string filePath);
+    void add_song(Song song);
     void play_next();
     void play_previous();
     void display_playlist();
+    void clear_playlist();
+    bool empty();
 };
 
 #endif

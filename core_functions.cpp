@@ -16,6 +16,69 @@ _Stack: Tracks play history for the "Previous Song" feature. Every time a song f
 */
 class play_history_stack{
     //ravin
+    StackNode *top_node;
+    int count;
+
+public:
+    play_history_stack(){
+        top_node = nullptr;
+        count = 0;
+    }
+
+    ~play_history_stack(){
+        while(!isEmpty()){
+            pop();
+        }
+    }
+
+    // Call this whenever a song finishes playing
+    void push(Song s){
+        StackNode *new_node = new StackNode(s);
+        new_node->next = top_node;
+        top_node = new_node;
+        count++;
+    }
+
+    // Call this for the "Previous Song" feature
+    Song pop(){
+        if(isEmpty()){
+            cout << "The stack is empty!" << endl;
+            return;
+        }
+        StackNode *temp = top_node;
+        Song poppedsong = temp->song;
+        top_node = top_node->next;
+        delete temp;
+        count--;
+        return poppedsong;
+    }
+
+    // Peek at the most recently played song without removing it
+    Song top(Song &result){
+        if(isEmpty()){
+            cout << "The stack is empty!" << endl;
+            return;
+        }
+        result = top_node->song;
+        return result;
+    }
+
+    bool isEmpty(){
+        return top_node == nullptr;
+    }
+
+    int size(){
+        return count;
+    }
+
+    void printHistory(){
+        std::cout << "Play History (most recent first):" << std::endl;
+        StackNode *cur = top_node;
+        while(cur != nullptr){
+            std::cout << " - " << cur->song.name << " by " << cur->song.author << std::endl;
+            cur = cur->next;
+        }
+    }
 };
 class play_up_next_queue{
     //chikheang
@@ -31,10 +94,9 @@ playlist_linked_list::playlist_linked_list()
 {
     current = nullptr;
 }
-
-void playlist_linked_list::add_song(string title, string author, string filePath)
+void playlist_linked_list::add_song(Song song)
 {
-    Node_Song *new_song = new Node_Song(Song{title, author, filePath});
+    Node_Song *new_song = new Node_Song(song);
     if (current == nullptr)
     {
         new_song->next = new_song;
@@ -49,7 +111,7 @@ void playlist_linked_list::add_song(string title, string author, string filePath
         new_song->next = current;
         current->prev = new_song;
     }
-    cout << "Added: " << title << endl;
+    cout << "Added: " << song.name << endl;
 }
 
 void playlist_linked_list::play_next()
@@ -90,4 +152,27 @@ void playlist_linked_list::display_playlist()
             cout << "Now playing" << endl;
         temp = temp->next;
     } while (temp != current);
+}
+
+void playlist_linked_list::clear_playlist()
+{
+    if (current == nullptr) return;
+
+    Node_Song *head = current;
+    Node_Song *temp = current;
+
+    do {
+        Node_Song *nextNode = temp->next;
+        delete temp;
+        temp = nextNode;
+    } while (temp != head);
+
+    current = nullptr;
+}
+
+bool playlist_linked_list::empty(){
+    if(current == nullptr){
+        return true;
+    }
+    return false;
 }
