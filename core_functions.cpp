@@ -146,7 +146,7 @@ void playlist_linked_list::play_next()
         return;
     }
     current = current->next;
-    cout << "The next song is: " << current->song.name << ":"<< current->song.author<< endl;
+    cout << "The next song is: " << current->song.name << endl;
 }
  
 void playlist_linked_list::play_previous()
