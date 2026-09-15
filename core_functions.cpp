@@ -155,8 +155,7 @@ void playlist_linked_list::play_previous()
     {
         cout << "This playlist is empty." << endl;
         return;
-    }
-    current = current->prev;
+    }    current = current->prev;
     cout << "The previous song is: " << current->song.name << endl;
 }
  
