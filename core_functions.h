@@ -57,7 +57,20 @@ public:
     int size();
     void printHistory();
 };
-class play_up_next_queue{};
+class play_up_next_queue{
+    //chikheang
+private:
+    QueueNode *front, *rear;
+    int count;
+public:
+    play_up_next_queue();
+    ~play_up_next_queue();
+    void enqueue(Song s);
+    Song dequeue();
+
+    bool isEmpty();
+};
+
 class playlist_linked_list
 {
 public:
